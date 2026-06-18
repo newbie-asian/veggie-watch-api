@@ -1,22 +1,27 @@
 import type { Request, Response } from "express";
-import { ApiResponse } from "@/shared/utils/apiResponse.js";
-import type {
-  CreateUserDto,
-  UpdateUserDto,
-} from "@/modules/users/users.dto.js";
+import { sendSuccess } from "@/shared/utils/apiResponse.js";
+import type { CreateUserDto, UpdateUserDto } from "@/modules/user/user.dto.js";
 
 export const getAllUsers = async (_req: Request, res: Response) => {
-  // Placeholder for fetching users from a database
-  return ApiResponse.success(res, "Users fetched successfully", []);
+  return sendSuccess({
+    res,
+    statusCode: 200,
+    message: "Users fetched successfully",
+    data: [],
+  });
 };
 
-export const getUserById = async (req: Request, res: Response) => {
+export const getUserById = async (
+  req: Request<{ id: string }>,
+  res: Response,
+) => {
   const userId = req.params.id;
-  // Placeholder for fetching a specific user from a database
 
-  return ApiResponse.success(res, "User fetched successfully", {
-    id: userId,
-    name: "John Doe",
+  return sendSuccess({
+    res,
+    statusCode: 200,
+    message: "User fetched successfully",
+    data: {},
   });
 };
 
@@ -25,9 +30,13 @@ export const createUser = async (
   res: Response,
 ) => {
   const userData = req.body;
-  // Placeholder for creating a new user in a database
 
-  return ApiResponse.success(res, "User created successfully", userData, 201);
+  return sendSuccess({
+    res,
+    statusCode: 201,
+    message: "User created successfully",
+    data: userData,
+  });
 };
 
 export const updateUser = async (
@@ -36,18 +45,21 @@ export const updateUser = async (
 ) => {
   const userId = req.params.id;
   const updateData = req.body;
-  // Placeholder for updating a user in a database
-  return ApiResponse.success(res, "User updated successfully", {
-    id: userId,
-    ...updateData,
+
+  return sendSuccess({
+    res,
+    statusCode: 200,
+    message: "User updated successfully",
+    data: updateData,
   });
 };
 
 export const deleteUser = async (
-  req: Request<{ id: string }>,
+  _req: Request<{ id: string }>,
   res: Response,
-) => {
-  const userId = req.params.id;
-
-  return ApiResponse.success(res, "User deleted successfully", null);
-};
+) =>
+  sendSuccess({
+    res,
+    statusCode: 200,
+    message: "User deleted successfully",
+  });

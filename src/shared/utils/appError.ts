@@ -8,7 +8,7 @@ export class AppError extends Error {
     this.statusCode = statusCode;
     this.status = statusCode >= 400 && statusCode < 500 ? "failed" : "error";
 
-    Error.captureStackTrace(this, this.constructor);
     this.isOperational = true;
+    Error.captureStackTrace(this, this.constructor);
   }
 }

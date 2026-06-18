@@ -29,6 +29,31 @@ const PostgresErrorHandlers: Record<string, ErrorHandler> = {
     message: `A required field is missing. The column '${error.column}' cannot be null.`,
     constraint: error.column || null,
   }),
+  "42703": (error) => ({
+    message: "An undefined column was referenced in the query.",
+    constraint: error.column || null,
+  }),
+  "42601": () => ({
+    message: "There's a syntax error in the database query.",
+    constraint: null,
+  }),
+  "25000": () => ({
+    message:
+      "Transaction failed: a data integrity issue occurred within a database transaction.",
+    constraint: null,
+  }),
+  "08006": () => ({
+    message: "Database connection failed. The database may be unavailable.",
+    constraint: null,
+  }),
+  "42P01": () => ({
+    message: "A referenced table does not exist in the database.",
+    constraint: null,
+  }),
+  "40001": () => ({
+    message: "Transaction serialization failure. Please retry the transaction.",
+    constraint: null,
+  }),
 };
 
 export function getDbErrorMessage(

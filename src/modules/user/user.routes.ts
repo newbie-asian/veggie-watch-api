@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { validate } from "@/shared/middlewares/validate.middleware.js";
+import { validate } from "@/shared/middlewares/validate.js";
 import {
   createUser,
   updateUser,
@@ -7,7 +7,7 @@ import {
   getUserById,
   deleteUser,
 } from "@/modules/user/user.controller.js";
-import type { RouteModule } from "@/shared/types/index.js";
+import type { RouteModule } from "@/shared/types/RouteModule.js";
 
 // Define routes for users
 const router: Router = Router();

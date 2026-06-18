@@ -3,10 +3,10 @@ import type { Express } from "express";
 import helmet from "helmet";
 import cors from "cors";
 import {
-  correlationMiddleware,
+  correlation,
   loggerMiddleware,
   notFoundMiddleware,
-  globalErrorMiddleware,
+  globalError,
 } from "@/shared/middlewares/index.js";
 import { registerRoutes } from "@/router.js";
 
@@ -19,13 +19,13 @@ export const createApp = () => {
   app.use(express.json({ limit: "10mb" }));
   app.use(express.urlencoded({ extended: true }));
 
-  app.use(correlationMiddleware);
+  app.use(correlation);
   app.use(loggerMiddleware);
 
   registerRoutes(app);
 
   app.use(notFoundMiddleware);
-  app.use(globalErrorMiddleware);
+  app.use(globalError);
 
   return app;
 };

@@ -1,3 +1,4 @@
+import { logger } from "@/shared/utils/logger.js";
 import { z } from "zod";
 
 const ENVSCHEMA = z.object({
@@ -29,13 +30,8 @@ const ENVSCHEMA = z.object({
 
 const parsedEnv = ENVSCHEMA.safeParse(process.env);
 if (!parsedEnv.success) {
-  console.error(
-    "Invalid environment configurations:",
-    parsedEnv.error.message,
-    null,
-    2,
-  );
+  logger.error(parsedEnv.error, "Invalid environment configuration");
   process.exit(1);
 }
 
-export const config = parsedEnv.data;
+export const envConfig = parsedEnv.data;
