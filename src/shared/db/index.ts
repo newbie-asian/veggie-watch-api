@@ -1,7 +1,7 @@
 import { drizzle } from "drizzle-orm/node-postgres";
 import { Pool } from "pg";
 import * as schema from "./schema/index.js";
-import { envConfig } from "@/config/env.js";
+import { envConfig } from "@/config/envConfig.js";
 import { logger } from "@/shared/utils/logger.js";
 
 const pool = new Pool({
@@ -24,6 +24,7 @@ export const initDb = async () => {
     await db.execute("select 1");
     logger.info("Drizzle ORM connected successfully");
   } catch (error) {
-    throw error;
+    logger.error(error, "Error occured while initializing database connection");
+    process.exit(1);
   }
 };

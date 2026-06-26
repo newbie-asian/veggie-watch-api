@@ -1,5 +1,6 @@
-import { logger } from "@/shared/utils/logger.js";
 import { z } from "zod";
+
+process.loadEnvFile();
 
 const ENVSCHEMA = z.object({
   NODE_ENV: z
@@ -30,7 +31,6 @@ const ENVSCHEMA = z.object({
 
 const parsedEnv = ENVSCHEMA.safeParse(process.env);
 if (!parsedEnv.success) {
-  logger.error(parsedEnv.error, "Invalid environment configuration");
   process.exit(1);
 }
 

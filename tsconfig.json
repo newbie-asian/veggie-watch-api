@@ -32,5 +32,5 @@
     "skipLibCheck": true
   },
   "include": ["src/**/*"],
-  "ëxclude": ["node_modules", "dist"]
+  "ëxclude": ["node_modules", "dist", "drizzle.config.ts", ""]
 }

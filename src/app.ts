@@ -1,4 +1,4 @@
-import { envConfig } from "@/config/env.js";
+import { envConfig } from "@/config/envConfig.js";
 import { initDb } from "@/shared/db/index.js";
 import { createApp } from "@/createApp.js";
 import { logger } from "./shared/utils/logger.js";

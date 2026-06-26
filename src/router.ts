@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { logger } from "@/shared/utils/logger.js";
 import { centralizeRoutes } from "@/modules/centralizedRoutes.js";
-import { envConfig } from "@/config/env.js";
+import { envConfig } from "@/config/envConfig.js";
 
 export const registerRoutes = (app: Express) => {
   try {
@@ -10,5 +10,6 @@ export const registerRoutes = (app: Express) => {
     }
   } catch (error) {
     logger.error("Error registering routes");
+    process.exit(1);
   }
 };
